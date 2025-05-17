@@ -14,7 +14,7 @@ const PlaceOrder = () => {
   const {
     token, cartItems, setCartItems, getCartAmount, delivery_fee, products,
   } = useContext(ShopContext);
-  const backendUrl = 'https://ecommerce-backend-green-three.vercel.app';
+  const backendUrl = 'https://ecommerce-backend-hjqt.onrender.com';
 
 
   const [formData, setFormData] = useState({

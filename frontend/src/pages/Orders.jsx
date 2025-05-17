@@ -6,7 +6,7 @@ import axios from 'axios';
 const Orders = () => {
   const { token, currency } = useContext(ShopContext);
   const [orderData, setOrderData] = useState([]);
-  const backendUrl = 'https://ecommerce-backend-green-three.vercel.app';
+  const backendUrl = 'https://ecommerce-backend-hjqt.onrender.com';
 
 
 
