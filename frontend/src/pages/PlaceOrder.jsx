@@ -14,7 +14,7 @@ const PlaceOrder = () => {
   const {
     token, cartItems, setCartItems, getCartAmount, delivery_fee, products,
   } = useContext(ShopContext);
-  const backendUrl = 'http://localhost:4000';
+  const backendUrl = 'https://ecommerce-backend-green-three.vercel.app';
 
 
   const [formData, setFormData] = useState({
