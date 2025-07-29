@@ -9,12 +9,12 @@ const Navbar = () => {
   const { setShowSearch, getCartCount, navigate, token, setToken, setCartItems } = useContext(ShopContext);
   const location = useLocation();
   
-  const logout = () => {
-    navigate('/login')
-    localStorage.removeItem('token')
-    setToken('')
-    setCartItems({})
-  }
+const logout = () => {
+  navigate('/login')
+localStorage.removeItem('token')
+setToken('')
+setCartItems({})
+}
 
   const isActive = (path) => {
     return location.pathname === path;
@@ -31,7 +31,7 @@ const Navbar = () => {
               className="h-14 sm:h-16 md:h-20 w-auto object-contain" 
               alt="Logo" 
             />
-          </Link>
+      </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
@@ -47,7 +47,7 @@ const Navbar = () => {
               {isActive('/') && (
                 <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary-600"></div>
               )}
-            </NavLink>
+        </NavLink>
             <NavLink 
               to='/collection' 
               className={`relative font-medium transition-colors duration-200 ${
@@ -60,7 +60,7 @@ const Navbar = () => {
               {isActive('/collection') && (
                 <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary-600"></div>
               )}
-            </NavLink>
+        </NavLink>
             <NavLink 
               to='/about' 
               className={`relative font-medium transition-colors duration-200 ${
@@ -73,7 +73,7 @@ const Navbar = () => {
               {isActive('/about') && (
                 <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary-600"></div>
               )}
-            </NavLink>
+        </NavLink>
             <NavLink 
               to='/contact' 
               className={`relative font-medium transition-colors duration-200 ${
@@ -86,7 +86,7 @@ const Navbar = () => {
               {isActive('/contact') && (
                 <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary-600"></div>
               )}
-            </NavLink>
+        </NavLink>
           </div>
 
           {/* Right side actions */}
@@ -283,7 +283,7 @@ const Navbar = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> 
       </div>
     </nav>
   );

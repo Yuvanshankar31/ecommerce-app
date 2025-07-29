@@ -65,36 +65,72 @@ const Add = ({ token }) => {
   };
 
   return (
-    <div className="admin-content">
-      <div className="mb-8">
-        <h1 className="text-3xl font-display font-bold text-neutral-900 mb-2">
-          Add New Product
-        </h1>
-        <p className="text-neutral-600">
-          Create a new product listing for your store
-        </p>
+    <div className="add-product-page">
+      {/* Header Section */}
+      <div className="page-header">
+        <div className="header-content">
+          <div className="header-icon">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+            </svg>
+          </div>
+          <div className="header-text">
+            <h1 className="page-title">Add New Product</h1>
+            <p className="page-subtitle">Create a new product listing for your store</p>
+          </div>
+        </div>
+        <div className="header-actions">
+          <div className="form-progress">
+            <div className="progress-step active">
+              <span className="step-number">1</span>
+              <span className="step-label">Basic Info</span>
+            </div>
+            <div className="progress-step">
+              <span className="step-number">2</span>
+              <span className="step-label">Images</span>
+            </div>
+            <div className="progress-step">
+              <span className="step-number">3</span>
+              <span className="step-label">Details</span>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <form onSubmit={onSubmitHandler} className="space-y-8">
-        {/* Upload Images */}
-        <div className="form-group">
-          <label className="form-label">Product Images</label>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <form onSubmit={onSubmitHandler} className="product-form">
+        {/* Upload Images Section */}
+        <div className="form-section">
+          <div className="section-header">
+            <h2 className="section-title">Product Images</h2>
+            <p className="section-description">Upload up to 4 high-quality images of your product</p>
+          </div>
+          
+          <div className="image-upload-grid">
             {[setImage1, setImage2, setImage3, setImage4].map((setImg, index) => {
               const image = [image1, image2, image3, image4][index];
               return (
-                <label key={index} htmlFor={`image${index + 1}`} className="cursor-pointer">
-                  <div className="aspect-square bg-neutral-100 rounded-lg border-2 border-dashed border-neutral-300 hover:border-primary-400 transition-colors duration-200 flex items-center justify-center">
+                <label key={index} htmlFor={`image${index + 1}`} className="image-upload-item">
+                  <div className="upload-area">
                     {image ? (
-                      <img 
-                        className="w-full h-full object-cover rounded-lg" 
-                        src={URL.createObjectURL(image)} 
-                        alt="Upload Preview" 
-                      />
+                      <div className="image-preview">
+                        <img 
+                          className="preview-image" 
+                          src={URL.createObjectURL(image)} 
+                          alt="Upload Preview" 
+                        />
+                        <div className="image-overlay">
+                          <svg className="overlay-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                          </svg>
+                        </div>
+                      </div>
                     ) : (
-                      <div className="text-center">
-                        <img className="w-8 h-8 mx-auto mb-2 opacity-50" src={assets.upload_area} alt="Upload" />
-                        <p className="text-xs text-neutral-500">Image {index + 1}</p>
+                      <div className="upload-placeholder">
+                        <svg className="upload-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                        </svg>
+                        <span className="upload-text">Upload Image {index + 1}</span>
+                        <span className="upload-hint">Click to browse</span>
                       </div>
                     )}
                   </div>
@@ -102,7 +138,7 @@ const Add = ({ token }) => {
                     onChange={(e) => setImg(e.target.files[0])} 
                     type="file" 
                     id={`image${index + 1}`} 
-                    className="hidden" 
+                    className="hidden-input" 
                     accept="image/*"
                   />
                 </label>
@@ -111,113 +147,145 @@ const Add = ({ token }) => {
           </div>
         </div>
 
-        {/* Product Details */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Product Details Section */}
+        <div className="form-section">
+          <div className="section-header">
+            <h2 className="section-title">Product Details</h2>
+            <p className="section-description">Enter the basic information about your product</p>
+          </div>
+          
+          <div className="form-grid">
+            <div className="form-group">
+              <label className="form-label">
+                <span className="label-text">Product Name</span>
+                <span className="required-mark">*</span>
+              </label>
+              <input
+                onChange={(e) => setName(e.target.value)}
+                value={name}
+                className="form-input"
+                type="text"
+                placeholder="Enter product name"
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label className="form-label">
+                <span className="label-text">Price</span>
+                <span className="required-mark">*</span>
+              </label>
+              <div className="price-input-wrapper">
+                <span className="currency-symbol">₹</span>
+                <input
+                  onChange={(e) => setPrice(e.target.value)}
+                  value={price}
+                  className="form-input price-input"
+                  type="number"
+                  placeholder="0.00"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+
           <div className="form-group">
-            <label className="form-label">Product Name</label>
-            <input
-              onChange={(e) => setName(e.target.value)}
-              value={name}
-              className="input-field"
-              type="text"
-              placeholder="Enter product name"
+            <label className="form-label">
+              <span className="label-text">Description</span>
+              <span className="required-mark">*</span>
+            </label>
+            <textarea
+              onChange={(e) => setDescription(e.target.value)}
+              value={description}
+              className="form-textarea"
+              rows="4"
+              placeholder="Enter detailed product description..."
               required
             />
           </div>
-
-          <div className="form-group">
-            <label className="form-label">Price</label>
-            <input
-              onChange={(e) => setPrice(e.target.value)}
-              value={price}
-              className="input-field"
-              type="number"
-              placeholder="0.00"
-              required
-            />
-          </div>
         </div>
 
-        <div className="form-group">
-          <label className="form-label">Description</label>
-          <textarea
-            onChange={(e) => setDescription(e.target.value)}
-            value={description}
-            className="textarea-field"
-            rows="4"
-            placeholder="Enter product description"
-            required
-          />
-        </div>
-
-        {/* Category and Subcategory */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="form-group">
-            <label className="form-label">Category</label>
-            <select 
-              onChange={(e) => setCategory(e.target.value)} 
-              value={category} 
-              className="select-field"
-            >
-              <option value="Men">Men</option>
-              <option value="Women">Women</option>
-              <option value="Kids">Kids</option>
-            </select>
+        {/* Category & Settings Section */}
+        <div className="form-section">
+          <div className="section-header">
+            <h2 className="section-title">Category & Settings</h2>
+            <p className="section-description">Organize your product and set preferences</p>
           </div>
-
-          <div className="form-group">
-            <label className="form-label">Sub Category</label>
-            <select 
-              onChange={(e) => setSubCategory(e.target.value)} 
-              value={subCategory} 
-              className="select-field"
-            >
-              <option value="Topwear">Topwear</option>
-              <option value="Bottomwear">Bottomwear</option>
-              <option value="Winterwear">Winterwear</option>
-            </select>
-          </div>
-        </div>
-
-        {/* Product Sizes */}
-        <div className="form-group">
-          <label className="form-label">Product Sizes</label>
-          <div className="flex flex-wrap gap-3">
-            {["S", "M", "L", "XL", "XXL"].map(size => (
-              <button
-                key={size}
-                type="button"
-                onClick={() => setSizes(prev => prev.includes(size) 
-                  ? prev.filter(item => item !== size) 
-                  : [...prev, size])}
-                className={`px-4 py-2 rounded-lg border-2 font-medium transition-all duration-200 ${
-                  sizes.includes(size) 
-                    ? 'border-primary-600 bg-primary-50 text-primary-700' 
-                    : 'border-neutral-300 text-neutral-700 hover:border-neutral-400 hover:bg-neutral-50'
-                }`}
+          
+          <div className="form-grid">
+            <div className="form-group">
+              <label className="form-label">Category</label>
+              <select 
+                onChange={(e) => setCategory(e.target.value)} 
+                value={category} 
+                className="form-select"
               >
-                {size}
-              </button>
-            ))}
+                <option value="Men">Men</option>
+                <option value="Women">Women</option>
+                <option value="Kids">Kids</option>
+              </select>
+            </div>
+
+            <div className="form-group">
+              <label className="form-label">Sub Category</label>
+              <select 
+                onChange={(e) => setSubCategory(e.target.value)} 
+                value={subCategory} 
+                className="form-select"
+              >
+                <option value="Topwear">Topwear</option>
+                <option value="Bottomwear">Bottomwear</option>
+                <option value="Winterwear">Winterwear</option>
+              </select>
+            </div>
+          </div>
+
+          {/* Product Sizes */}
+          <div className="form-group">
+            <label className="form-label">Available Sizes</label>
+            <div className="size-selector">
+              {["S", "M", "L", "XL", "XXL"].map(size => (
+                <button
+                  key={size}
+                  type="button"
+                  onClick={() => setSizes(prev => prev.includes(size) 
+                    ? prev.filter(item => item !== size) 
+                    : [...prev, size])}
+                  className={`size-button ${sizes.includes(size) ? 'selected' : ''}`}
+                >
+                  {size}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Bestseller Toggle */}
+          <div className="form-group">
+            <label className="toggle-label">
+              <input
+                type="checkbox"
+                checked={bestseller}
+                onChange={(e) => setBestseller(e.target.checked)}
+                className="toggle-input"
+              />
+              <span className="toggle-slider"></span>
+              <span className="toggle-text">Mark as Bestseller</span>
+            </label>
           </div>
         </div>
 
-        {/* Bestseller Toggle */}
-        <div className="form-group">
-          <label className="flex items-center cursor-pointer">
-            <input
-              type="checkbox"
-              checked={bestseller}
-              onChange={(e) => setBestseller(e.target.checked)}
-              className="w-4 h-4 text-primary-600 border-neutral-300 rounded focus:ring-primary-500 focus:ring-2 mr-3"
-            />
-            <span className="text-neutral-700">Mark as Bestseller</span>
-          </label>
-        </div>
-
-        {/* Submit Button */}
-        <div className="flex justify-end">
+        {/* Submit Section */}
+        <div className="form-actions">
+          <button type="button" className="btn-secondary">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+            Cancel
+          </button>
           <button type="submit" className="btn-primary">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
             Add Product
           </button>
         </div>
