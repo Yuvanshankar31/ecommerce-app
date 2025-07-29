@@ -24,25 +24,36 @@ useEffect(()=> {
 
   return (
     <div className="admin-layout">
-      <ToastContainer />
+      <ToastContainer 
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       {token === "" ? (
         <Login setToken={setToken}/>
       ) : (
-        <>
+        <div className="admin-container">
           <Navbar setToken={setToken} />
-          <div className="flex min-h-screen">
+          <div className="admin-main">
             <Sidebar />
-            <div className="flex-1 p-6">
-              <div className="max-w-7xl mx-auto">
+            <main className="admin-content-area">
+              <div className="content-wrapper">
                 <Routes>
                   <Route path='/add' element={<Add token={token}/>} />
                   <Route path='/list' element={<List token={token}/>} />
                   <Route path='/orders' element={<Orders token={token} />} />
                 </Routes>
               </div>
-            </div>
+            </main>
           </div>
-        </>
+        </div>
       )}
     </div>
   )
