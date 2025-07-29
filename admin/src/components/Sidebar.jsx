@@ -18,7 +18,7 @@ const Sidebar = () => {
             <h3 className="nav-section-title">Management</h3>
             <div className="nav-links">
               <NavLink 
-                to="/add"
+                to="/admin/add"
                 className={({ isActive }) => 
                   `nav-item ${isActive ? 'active' : ''}`
                 }
@@ -31,7 +31,7 @@ const Sidebar = () => {
               </NavLink>
               
               <NavLink 
-                to="/list"
+                to="/admin/list"
                 className={({ isActive }) => 
                   `nav-item ${isActive ? 'active' : ''}`
                 }
@@ -44,7 +44,7 @@ const Sidebar = () => {
               </NavLink>
 
               <NavLink 
-                to="/orders"
+                to="/admin/orders"
                 className={({ isActive }) => 
                   `nav-item ${isActive ? 'active' : ''}`
                 }

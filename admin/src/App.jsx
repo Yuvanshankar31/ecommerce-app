@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from './components/Navbar'
 import Sidebar from './components/Sidebar'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import Add from './pages/Add'
 import List from './pages/List'
 import Edit from './pages/Edit'
@@ -47,10 +47,11 @@ useEffect(()=> {
             <main className="admin-content-area">
               <div className="content-wrapper">
                 <Routes>
-                  <Route path='/add' element={<Add token={token}/>} />
-                  <Route path='/list' element={<List token={token}/>} />
-                  <Route path='/edit/:id' element={<Edit token={token}/>} />
-                  <Route path='/orders' element={<Orders token={token} />} />
+                  <Route path='/admin/add' element={<Add token={token}/>} />
+                  <Route path='/admin/list' element={<List token={token}/>} />
+                  <Route path='/admin/edit/:id' element={<Edit token={token}/>} />
+                  <Route path='/admin/orders' element={<Orders token={token} />} />
+                  <Route path='/' element={<Navigate to='/admin/list' />} />
                 </Routes>
               </div>
             </main>

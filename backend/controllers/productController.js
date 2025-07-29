@@ -97,6 +97,8 @@ const updateProduct = async (req, res) => {
   try {
     const { id, name, description, price, category, subcategory, sizes, bestseller } = req.body
     
+    console.log('Update request body:', req.body); // Debug log
+    
     // Handle image uploads if new images are provided
     let imagesUrl = []
     if (req.files && Object.keys(req.files).length > 0) {
@@ -115,6 +117,17 @@ const updateProduct = async (req, res) => {
       )
     }
 
+    // Parse sizes properly - handle both string and array
+    let parsedSizes = ['S', 'M', 'L', 'XL']; // Default sizes
+    if (sizes) {
+      try {
+        parsedSizes = typeof sizes === 'string' ? JSON.parse(sizes) : sizes;
+      } catch (error) {
+        console.log('Error parsing sizes:', error);
+        // Keep default sizes if parsing fails
+      }
+    }
+
     const updateData = {
       name,
       description,
@@ -122,7 +135,7 @@ const updateProduct = async (req, res) => {
       price: Number(price),
       subcategory,
       bestseller: bestseller === "true" ? true : false,
-      sizes: JSON.parse(sizes),
+      sizes: parsedSizes,
       date: new Date()
     }
 
@@ -130,6 +143,9 @@ const updateProduct = async (req, res) => {
     if (imagesUrl.length > 0) {
       updateData.image = imagesUrl
     }
+
+    console.log('Updating product with ID:', id);
+    console.log('Update data:', updateData);
 
     const product = await productModel.findByIdAndUpdate(id, updateData, { new: true })
     
@@ -139,7 +155,7 @@ const updateProduct = async (req, res) => {
 
     res.json({ success: true, message: "Product Updated Successfully", product })
   } catch (error) {
-    console.log(error)
+    console.log('Update product error:', error)
     res.json({ success: false, message: error.message })
   }
 }

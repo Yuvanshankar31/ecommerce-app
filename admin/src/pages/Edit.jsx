@@ -133,12 +133,20 @@ const Edit = ({ token }) => {
         }
       });
 
+      console.log('Submitting form data:', {
+        id,
+        formData,
+        images: Object.keys(images).filter(key => images[key])
+      });
+
       const response = await axios.post(backendUrl + '/api/product/update', formDataToSend, {
         headers: {
           token,
           'Content-Type': 'multipart/form-data'
         }
       });
+
+      console.log('Update response:', response.data);
 
       if (response.data.success) {
         toast.success('Product updated successfully!');
@@ -147,7 +155,7 @@ const Edit = ({ token }) => {
         toast.error(response.data.message);
       }
     } catch (error) {
-      console.log(error);
+      console.log('Update error:', error);
       toast.error('Failed to update product');
     } finally {
       setSubmitting(false);
