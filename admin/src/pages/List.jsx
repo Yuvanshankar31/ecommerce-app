@@ -2,8 +2,10 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react';
 import { backendUrl, currency } from '../App'
 import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
 
 const List = ({token}) => {
+  const navigate = useNavigate();
 
   const [list,setList] = useState([])
   const [loading, setLoading] = useState(true)
@@ -44,6 +46,10 @@ const List = ({token}) => {
         toast.error(error.message)
       }
     }
+  }
+
+  const editProduct = (id) => {
+    navigate(`/admin/edit/${id}`);
   }
 
   useEffect(()=> {
@@ -168,6 +174,7 @@ const List = ({token}) => {
                     <div className="action-buttons">
                       <button 
                         className="action-btn edit-btn"
+                        onClick={() => editProduct(item._id)}
                         title="Edit Product"
                       >
                         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
