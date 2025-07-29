@@ -1428,20 +1428,22 @@ body {
   position: relative;
   display: flex;
   align-items: center;
+  width: 100%;
 }
 
 .currency-symbol {
   position: absolute;
   left: 16px;
-  color: #374151;
+  color: #1e293b;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 16px;
   z-index: 10;
   pointer-events: none;
+  background-color: white;
+  padding: 0 4px;
 }
 
 .price-input {
-  padding-left: 32px;
   width: 100%;
   padding: 12px 16px 12px 32px;
   border: 1px solid #d1d5db;
@@ -1452,6 +1454,51 @@ body {
 }
 
 .price-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Override form-input styles for price input */
+.form-input.price-input {
+  padding-left: 32px;
+}
+
+/* Price Input Specific Styles */
+.price-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.price-input-wrapper .currency-symbol {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #1e293b;
+  font-weight: 600;
+  font-size: 16px;
+  z-index: 10;
+  pointer-events: none;
+  background-color: white;
+  padding: 0 4px;
+  line-height: 1;
+}
+
+.price-input-wrapper .form-input.price-input {
+  padding-left: 32px !important;
+  width: 100%;
+  padding: 12px 16px 12px 32px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  background-color: white;
+  transition: all 0.2s ease;
+}
+
+.price-input-wrapper .form-input.price-input:focus {
   outline: none;
   border-color: #3b82f6;
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
