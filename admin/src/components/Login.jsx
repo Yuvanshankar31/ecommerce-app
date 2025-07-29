@@ -26,37 +26,66 @@ const Login = ({ setToken }) => {
   };
 
   return (
-    <div className='min-h-screen flex items-center justify-center w-full'>
-      <div>
-        <div className='bg-white shadow-md rounded-lg px-8 py-6 max-w-md'>
-          <h1 className='text-2xl font-bold mb-4'>Admin Panel</h1>
-          <form onSubmit={onSubmitHandler}>
-            <div className='mb-3 min-w-72'>
-              <p className='text-sm font-medium text-gray-700 mb-2'>Email Address</p>
-              <input
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
-                className='rounded-md w-full px-3 py-2 border border-gray-300 outline-none'
-                type='email'
-                placeholder='your@email.com'
-                required
-              />
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-neutral-50 to-neutral-100 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full">
+        <div className="card">
+          <div className="p-8">
+            {/* Header */}
+            <div className="text-center mb-8">
+              <h1 className="text-3xl font-display font-bold text-neutral-900 mb-2">
+                Admin Panel
+              </h1>
+              <p className="text-neutral-600">
+                Sign in to manage your ecommerce store
+              </p>
             </div>
-            <div className='mb-3 min-w-72'>
-              <p className='text-sm font-medium text-gray-700 mb-2'>Password</p>
-              <input
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
-                className='rounded-md w-full px-3 py-2 border border-gray-300 outline-none'
-                type='password'
-                placeholder='Enter your password'
-                required
-              />
+
+            {/* Form */}
+            <form onSubmit={onSubmitHandler} className="space-y-6">
+              <div>
+                <label className="form-label">
+                  Email Address
+                </label>
+                <input
+                  onChange={(e) => setEmail(e.target.value)}
+                  value={email}
+                  className="input-field"
+                  type="email"
+                  placeholder="admin@example.com"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="form-label">
+                  Password
+                </label>
+                <input
+                  onChange={(e) => setPassword(e.target.value)}
+                  value={password}
+                  className="input-field"
+                  type="password"
+                  placeholder="Enter your password"
+                  required
+                />
+              </div>
+
+              {/* Submit Button */}
+              <button 
+                type="submit" 
+                className="w-full btn-primary"
+              >
+                Sign In
+              </button>
+            </form>
+
+            {/* Footer */}
+            <div className="mt-8 text-center">
+              <p className="text-sm text-neutral-500">
+                Secure admin access for store management
+              </p>
             </div>
-            <button className='mt-2 w-full py-2 px-4 rounded-md text-white bg-black' type='submit'>
-              Login
-            </button>
-          </form>
+          </div>
         </div>
       </div>
     </div>
