@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
 import { ShopContext } from '../context/ShopContext';
 import Title from './Title';
+import { useNavigate } from 'react-router-dom';
 
 const CartTotal = () => {
   const { currency, delivery_fee, getCartAmount } = useContext(ShopContext);
+  const navigate = useNavigate();
 
   if (typeof getCartAmount !== 'function') {
     return <p className="text-red-500">Error: Unable to calculate cart total.</p>;
@@ -34,6 +36,7 @@ const CartTotal = () => {
           <p>{currency}{total.toFixed(2)}</p>
         </div>
       </div>
+      {/* Removed Trial Room button */}
     </div>
   );
 };
