@@ -29,7 +29,7 @@ const addProduct = async (req,res) =>{
       bestseller: bestseller === "true" ? true : false,
       sizes: JSON.parse(sizes),
       image: imagesUrl,
-      date: new Date()
+      date: Date.now()
      }
      console.log(productData);
 const product = new productModel(productData);
@@ -41,7 +41,7 @@ await product.save()
   }
   catch (error) {
     console.log(error)
-   res.json({succes:false,message:error.message})
+   res.json({success:false,message:error.message})
   }
 }
 
@@ -55,7 +55,7 @@ try {
 } catch (error) 
 {
   console.log(error)
-  res.json({ succes: false, message: error.message })
+  res.json({ success: false, message: error.message })
 
   }
 
